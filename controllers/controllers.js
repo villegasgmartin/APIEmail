@@ -1,5 +1,5 @@
 const {response} = require('express');
-const { emailMutual, emailContacto } = require('./nodemailer');
+const { emailMutual, emailContacto, test, emailVittal } = require('./nodemailer');
 
 const mutual = (req, res) => {
 	const { mensaje, nombre, correo } = req.body;
@@ -7,6 +7,22 @@ const mutual = (req, res) => {
 	try {
 		
 		emailMutual (mensaje, nombre, correo);
+		res.status(200).json({
+			message:
+				' Se ha enviado una email'
+		});
+	} catch (error) {
+		
+		res.status(500).json('error al mandar mail');
+	}
+};
+
+const vittal = (req, res) => {
+	const { mensaje, nombre, correo } = req.body;
+	
+	try {
+		
+		emailVittal (mensaje, nombre, correo);
 		res.status(200).json({
 			message:
 				' Se ha enviado una email'
@@ -33,7 +49,24 @@ const contacto = (req, res) => {
 	}
 };
 
+const recuperar2FA = (req, res) => {
+
+	try {
+		test();
+		res.json({
+			msg:'entregado'
+		})
+	} catch (error) {
+		console.log(error);
+	}
+	
+
+
+}
+
 module.exports={
     mutual, 
-    contacto
+    contacto,
+	recuperar2FA,
+	vittal
 }
