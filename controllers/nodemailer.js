@@ -58,7 +58,6 @@ function emailContacto (mensaje, nombre, correo, destino){
   transporter.sendMail({
     from: "martinvillegas90@hotmail.com",
     to: destino, 
-    // cc: "brendagomez1310@gmail.com",
     subject: "Consulta desde coopertativa electrica", // Subject line
     text: "Consulta Contacto", 
     html: `<div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
