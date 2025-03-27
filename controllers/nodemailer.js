@@ -2,6 +2,17 @@ const nodemailer = require('nodemailer');
 const mutualCorreo = require('../templates/emailMutual');
 const contactoCorreo = require('../templates/emailContacto');
 
+// import { Resend } from 'resend';
+
+// const resend = new Resend('re_123456789');
+
+// await resend.emails.send({
+//   from: 'Acme <onboarding@resend.dev>',
+//   to: ['delivered@resend.dev'],
+//   subject: 'hello world',
+//   html: '<p>it works!</p>',
+// });
+
 
 
 
@@ -10,7 +21,7 @@ let transporter = nodemailer.createTransport({
   port: 587,
   auth: {
       user: "apikey",
-      pass: "SSG.xtebUvpJSua7x6NEDf-4UQ.dNSFhz7Vo9sustX4CaoztH251k0oYrcs_DxNyroJ5ek"
+      pass: "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"
   }
 })
 function emailMutual (mensaje, nombre, correo){
