@@ -106,10 +106,10 @@ function emailContacto (mensaje, nombre, correo, destino){
 function emailVittal (mensaje, nombre, correo){
   console.log(mensaje, nombre, correo)
       transporter.sendMail({
-        from: "martinvillegas90@hotmail.com",
-        to: "villegasgmartin@gmail.com", 
-        subject: "Consulta AMI Mutual", // Subject line
-        text: "Consulta AMI Mutual", 
+        from: "villegasgmartin@gmail.com",
+        to: "bibliotecarateriymardelplata@gmail.com", 
+        subject: "Consulta Vittal", // Subject line
+        text: "Consulta Vittal", 
         html: `<div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
         <h2 style="color: #333333; text-align: center;">Nuevo Mensaje de Ami Mutual</h2>
         <p style="font-size: 16px; color: #555555;">Has recibido un nuevo mensaje a través del formulario de contacto- Vittal. A continuación, los detalles:</p>
@@ -136,7 +136,7 @@ function emailVittal (mensaje, nombre, correo){
         if (error) {
           console.log("error al enviar",process.env.SENDGRID_API_KEY, error);
         } else {
-          console.log('mensaje enviado');
+          console.log('mensaje enviado', info);
         }
       });
 
