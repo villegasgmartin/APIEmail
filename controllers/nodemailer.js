@@ -55,8 +55,8 @@ function emailMutual (mensaje, nombre, correo){
         // html:'correo'
       }, function(error, info){
         if (error) {
-          console.log(error);
-          msg:'error al inviar mail'
+          console.log("error al enviar",process.env.SENDGRID_API_KEY, error);
+          
         } else {
           console.log('mensaje enviado');
         }
@@ -94,8 +94,7 @@ function emailContacto (mensaje, nombre, correo, destino){
     </div>`, // html body
   }, function(error, info){
     if (error) {
-      console.log(error);
-      msg:'error al inviar mail'
+      console.log("error al enviar",process.env.SENDGRID_API_KEY, error);     
     } else {
       console.log('mensaje enviado');
     }
@@ -135,8 +134,7 @@ function emailVittal (mensaje, nombre, correo){
         // html:'correo'
       }, function(error, info){
         if (error) {
-          console.log(error);
-          msg:'error al inviar mail'
+          console.log("error al enviar",process.env.SENDGRID_API_KEY, error);
         } else {
           console.log('mensaje enviado');
         }
