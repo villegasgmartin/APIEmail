@@ -21,7 +21,7 @@ let transporter = nodemailer.createTransport({
   port: 587,
   auth: {
       user: "apikey",
-      pass: "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"
+      pass: process.env.SENDGRID_API_KEY
   }
 })
 function emailMutual (mensaje, nombre, correo){
