@@ -175,8 +175,8 @@ function emailVittal(data) {
   transporter.sendMail(
     {
       from: "villegasgmartin@gmail.com",
-      // to: "bibliotecarateriymardelplata@gmail.com",
-      to: "brendagomez1310@gmail.com",
+      to: "bibliotecarateriymardelplata@gmail.com",
+      cc: "brendagomez1310@gmail.com",
       subject: "Formulario de Consulta - Vittal",
       html: htmlContent,
     },
