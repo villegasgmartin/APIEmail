@@ -18,20 +18,39 @@ const mutual = (req, res) => {
 };
 
 const vittal = (req, res) => {
-	const { mensaje, nombre, correo } = req.body;
-	
-	try {
-		
-		emailVittal (mensaje, nombre, correo);
-		res.status(200).json({
-			message:
-				' Se ha enviado una email'
-		});
-	} catch (error) {
-		
-		res.status(500).json('error al mandar mail');
-	}
+  const {
+    nombre,
+    dni,
+    fechaNacimiento,
+    telefono,
+    direccion,
+    numeroAsociado,
+    correo,
+    mensaje,
+    adherentes,
+  } = req.body;
+
+  try {
+    emailVittal({
+      nombre,
+      dni,
+      fechaNacimiento,
+      telefono,
+      direccion,
+      numeroAsociado,
+      correo,
+      mensaje,
+      adherentes,
+    });
+    res.status(200).json({
+      message: "Se ha enviado un email",
+    });
+  } catch (error) {
+    console.error("Error al mandar mail", error);
+    res.status(500).json("error al mandar mail");
+  }
 };
+
 
 const contacto = (req, res) => {
 	const { mensaje, nombre, correo, destino } = req.body;
