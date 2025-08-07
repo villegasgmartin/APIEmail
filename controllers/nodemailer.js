@@ -1,36 +1,17 @@
-const nodemailer = require('nodemailer');
-const mutualCorreo = require('../templates/emailMutual');
-const contactoCorreo = require('../templates/emailContacto');
-
-// import { Resend } from 'resend';
-
-// const resend = new Resend('re_123456789');
-
-// await resend.emails.send({
-//   from: 'Acme <onboarding@resend.dev>',
-//   to: ['delivered@resend.dev'],
-//   subject: 'hello world',
-//   html: '<p>it works!</p>',
-// });
 
 
 
+async function emailMutual (mensaje, nombre, correo){
 
-let transporter = nodemailer.createTransport({
-  host: 'smtp.sendgrid.net',
-  port: 587,
-  auth: {
-      user: "apikey",
-      pass: process.env.SENDGRID_API_KEY
-  }
-})
-function emailMutual (mensaje, nombre, correo){
-  console.log(mensaje, nombre, correo)
-      transporter.sendMail({
-        from: "martinvillegas90@hotmail.com",
-        to: "villegasgmartin@gmail.com", 
-        subject: "Consulta AMI Mutual", // Subject line
-        text: "Consulta AMI Mutual", 
+   const { Resend } = await import('resend');
+
+  const resend = new Resend(process.env.RESENDAPI);
+const response = await resend.emails.send({
+  from: "Cooperativa Electrica Mar del Plata <info@cooperativamdp.com>",
+  to: ['info@cooperativamdp.com'],
+  subject: "Consulta AMi Mutual",
+  text: "Consulta AMi Mutual",
+  html:  "Consulta AMI Mutual", 
         html: `<div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
         <h2 style="color: #333333; text-align: center;">Nuevo Mensaje de Ami Mutual</h2>
         <p style="font-size: 16px; color: #555555;">Has recibido un nuevo mensaje a través del formulario de contacto. A continuación, los detalles:</p>
@@ -51,27 +32,22 @@ function emailMutual (mensaje, nombre, correo){
         </table>
         
         <p style="font-size: 14px; color: #777777; text-align: center; margin-top: 20px;">Este mensaje fue enviado desde el formulario de contacto de AMI Mutual.</p>
-    </div>`, // html body
-        // html:'correo'
-      }, function(error, info){
-        if (error) {
-          console.log("error al enviar",process.env.SENDGRID_API_KEY, error);
-          
-        } else {
-          console.log('mensaje enviado');
-        }
-      });
+    </div>`
 
-}
+})
+console.log(response);
+  }
 
-function emailContacto (mensaje, nombre, correo, destino){
-  
-  transporter.sendMail({
-    from: "martinvillegas90@hotmail.com",
-    to: destino, 
-    subject: "Consulta desde coopertativa electrica", // Subject line
-    text: "Consulta Contacto", 
-    html: `<div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+async function emailContacto (mensaje, nombre, correo, destino){
+   const { Resend } = await import('resend');
+
+  const resend = new Resend(process.env.RESENDAPI);
+const response = await resend.emails.send({
+  from: "Cooperativa Electrica Mar del Plata <info@cooperativamdp.com>",
+  to: [destino],
+  subject: "Consulta desde coopertativa electrica",
+  text: "Consulta Contacto",
+  html: `<div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
         <h2 style="color: #333333; text-align: center;">Nuevo Mensaje de Contacto</h2>
         <p style="font-size: 16px; color: #555555;">Has recibido un nuevo mensaje a través del formulario de contacto. A continuación, los detalles:</p>
         
@@ -91,19 +67,18 @@ function emailContacto (mensaje, nombre, correo, destino){
         </table>
         
         <p style="font-size: 14px; color: #777777; text-align: center; margin-top: 20px;">Este mensaje fue enviado desde el formulario de contacto.</p>
-    </div>`, // html body
-  }, function(error, info){
-    if (error) {
-      console.log("error al enviar",process.env.SENDGRID_API_KEY, error);     
-    } else {
-      console.log('mensaje enviado');
-    }
-  });
+    </div>`});
+console.log(response);
 
 }
 
 
-function emailVittal(data) {
+async function emailVittal(data) {
+
+  const { Resend } = await import('resend');
+
+  const resend = new Resend(process.env.RESENDAPI);
+
   const {
     nombre,
     dni,
@@ -172,22 +147,17 @@ function emailVittal(data) {
   </div>`;
 
   // Envío del correo
-  transporter.sendMail(
-    {
-      from: "villegasgmartin@gmail.com",
-      to: "bibliotecarateriymardelplata@gmail.com",
-      cc: "brendagomez1310@gmail.com",
-      subject: "Formulario de Consulta - Vittal",
-      html: htmlContent,
-    },
-    function (error, info) {
-      if (error) {
-        console.error("Error al enviar correo:", error);
-      } else {
-        console.log("Correo enviado:", info.response);
-      }
-    }
-  );
+
+  const response = await resend.emails.send({
+  from: "Cooperativa Electrica Mar del Plata <info@cooperativamdp.com>",
+  to: ['bibliotecarateriymardelplata@gmail.com', 'villegasgmartin@gmail.com'],
+  subject: "Formulario de Consulta - Vittal",
+  text: "Formulario de Consulta - Vittal",
+  html:htmlContent
+ })
+
+
+ console.log(response);
 }
 
 
